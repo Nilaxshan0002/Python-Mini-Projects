@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- HERO SECTION -->
+<div class="hero-section">
+  <div class="hero-left">
+    <h1 class="serif-title">Libre <br><em>typefaces</em><br> with serious<br> personality.</h1>
+    <p class="hero-desc">
+      Velvetyne is an independent type foundry creating retail and custom fonts that are expressive, versatile and made to last.
+    </p>
+    <a href="/about" class="read-more">Read Velvetyne's story →</a>
+  </div>
+
+  <div class="hero-right">
+    <p class="editorial-text">Editorial Serif</p>
+    <div class="giant-abc" style="font-family: 'Times New Roman', serif; color: #5a1818;">
+      AaBbCc
+    </div>
+    <div class="font-info">
+      <h3>Verlag</h3>
+      <p>A sharp editorial serif with high contrast and a confident voice.</p>
+      <a href="#">View family →</a>
+    </div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-bar">
+  <div class="filter-left">
+    <span class="filter-label">All Fonts</span>
+    <span class="filter-label">{{ fonts|length }}</span>
+  </div>
+  
+  <div class="filter-center">
+    {% for cat in categories %}
+      <a href="/?category={{ cat }}" class="filter-pill {{ 'active' if active_filter == cat else '' }}">
+        {{ cat }}
+      </a>
+    {% endfor %}
+  </div>
+
+  <div class="filter-right">
+    <span>Custom</span>
+    <span>Filters ⚙️</span>
+  </div>
+</div>
+
+<!-- FONT GRID -->
+<div class="font-grid">
+  {% for font in fonts %}
+    <div class="font-card">
+      <div class="card-header">
+        <span>{{ font.name }}</span>
+        <span class="category">{{ font.category }}</span>
+      </div>
+      
+      <div class="font-preview" style="font-family: {{ font.font_family_css }};">
+        {{ font.name.split()[0] }}<br>{{ font.name.split()[1] if font.name.split()|length > 1 else '' }}
+      </div>
+      
+      <p class="font-desc">{{ font.description }}</p>
+      
+      <div class="card-footer">
+        <div class="price">${{ "%.2f"|format(font.price) }}</div>
+        <form method="POST" action="/add_to_cart/{{ font.id }}">
+          <button type="submit" class="btn-add">Add to Cart</button>
+        </form>
+      </div>
+    </div>
+  {% else %}
+    <p>No fonts found in this category.</p>
+  {% endfor %}
+</div>
+
+<!-- BOTTOM QUOTE -->
+<div class="bottom-quote">
+  <div class="quote-box">
+    <span class="icon">ffi</span>
+    <span>Ligatures</span>
+  </div>
+  <div class="quote-text">
+    Design is thinking <br> made <em>visual.</em>
+  </div>
+  <div class="quote-box">
+    <span class="icon">ã</span>
+    <span>Alternates</span>
+  </div>
+</div>
+
+{% endblock %}

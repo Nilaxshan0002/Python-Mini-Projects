@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Velvetyne Type Foundry</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a href="/" class="brand">Velvetyne</a>
+  </div>
+  <div class="nav-links">
+    <a href="/">Fonts ⌄</a>
+    <a href="/custom">Custom</a>
+    <a href="/about">About</a>
+    <a href="/journal">Journal</a>
+    <a href="/info">Info</a>
+  </div>
+  <div class="nav-right">
+    <form action="/search" method="GET" class="search-form">
+      <input type="text" name="q" placeholder="Search fonts...">
+    </form>
+    <a href="/cart" class="cart-link">Cart ({{ cart_count }})</a>
+    <a href="/admin" style="color: #999; margin-left: 15px;">Admin</a>
+  </div>
+</nav>
+
+<div class="flash-wrap">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for cat, msg in messages %}
+      <div class="flash {{ cat }}">{{ msg }}</div>
+    {% endfor %}
+  {% endwith %}
+</div>
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+</body>
+</html>

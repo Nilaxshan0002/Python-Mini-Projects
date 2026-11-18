@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div style="max-width: 800px; margin: 40px auto; font-family: 'Inter', sans-serif;">
+  <h2>Add a New Font</h2>
+  <form method="POST" style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 40px;">
+    <input name="name" placeholder="Font Name (e.g. Neue Machina)" required style="padding: 10px;">
+    
+    <select name="category" style="padding: 10px;">
+      <option value="Serif">Serif</option>
+      <option value="Sans">Sans</option>
+      <option value="Display">Display</option>
+      <option value="Script">Script</option>
+    </select>
+    
+    <input name="font_family_css" placeholder="CSS Font Family (e.g. Arial, sans-serif)" required style="padding: 10px;">
+    <textarea name="description" placeholder="Short description..." required style="padding: 10px; height: 80px;"></textarea>
+    
+    <button type="submit" style="padding: 12px; background: #111; color: white; border: none; cursor: pointer;">Add Font</button>
+  </form>
+
+  <h2>Existing Fonts</h2>
+  <ul>
+    {% for f in fonts %}
+      <li><strong>{{ f.name }}</strong> ({{ f.category }}) - {{ f.font_family_css }}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}

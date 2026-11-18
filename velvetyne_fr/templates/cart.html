@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-content">
+  <h1 class="serif-title">Your <em>Cart</em></h1>
+  
+  {% if items %}
+    <div style="margin-top: 40px; border-top: 1px solid #e0deda;">
+      {% for item in items %}
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #e0deda;">
+          <div>
+            <h3 style="font-family: 'EB Garamond', serif; font-size: 1.5rem;">{{ item.font.name }}</h3>
+            <p style="color: #666; font-size: 0.9rem;">{{ item.font.category }} License</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 30px;">
+            <span>${{ "%.2f"|format(item.font.price) }}</span>
+            <a href="/remove_from_cart/{{ item.id }}" style="color: #d9534f; text-decoration: none; font-size: 0.9rem;">Remove</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    
+    <div style="margin-top: 30px; text-align: right;">
+      <h2 style="font-family: 'EB Garamond', serif; font-size: 2rem;">Total: ${{ "%.2f"|format(total) }}</h2>
+      
+      <!-- Updated Checkout Button with Form -->
+      <form method="POST" action="/checkout">
+        <button type="submit" class="btn-add" style="margin-top: 15px; padding: 15px 40px; font-size: 1rem; cursor: pointer;">
+          Checkout
+        </button>
+      </form>
+
+    </div>
+  {% else %}
+    <p style="margin-top: 30px;">Your cart is empty. <a href="/" style="color: #5a1818; text-decoration: underline;">Go back to fonts.</a></p>
+  {% endif %}
+</div>
+{% endblock %}

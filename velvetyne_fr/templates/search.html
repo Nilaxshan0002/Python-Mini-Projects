@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-content">
+  <h1 class="serif-title">Search Results for "{{ query }}"</h1>
+  
+  <div class="font-grid" style="margin-top: 40px;">
+    {% for font in fonts %}
+      <div class="font-card">
+        <div class="card-header">
+          <span>{{ font.name }}</span>
+          <span class="category">{{ font.category }}</span>
+        </div>
+        <div class="font-preview" style="font-family: {{ font.font_family_css }};">
+          {{ font.name.split()[0] }}<br>{{ font.name.split()[1] if font.name.split()|length > 1 else '' }}
+        </div>
+        <p class="font-desc">{{ font.description }}</p>
+        <div class="card-footer">
+          <div class="price">${{ "%.2f"|format(font.price) }}</div>
+          <form method="POST" action="/add_to_cart/{{ font.id }}">
+            <button type="submit" class="btn-add">Add to Cart</button>
+          </form>
+        </div>
+      </div>
+    {% else %}
+      <p>No fonts found matching "{{ query }}".</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-content">
+  <h1 class="serif-title">Get in <em>Touch</em></h1>
+  <p class="hero-desc" style="margin-bottom: 30px;">Tell us about your brand and what kind of typeface you are looking for.</p>
+  
+  <form method="POST" style="max-width: 500px; display: flex; flex-direction: column; gap: 15px;">
+    <input type="text" name="name" placeholder="Your Name" required style="padding: 12px; border: 1px solid #e0deda; border-radius: 4px; font-family: 'Inter', sans-serif;">
+    <input type="email" name="email" placeholder="Email Address" required style="padding: 12px; border: 1px solid #e0deda; border-radius: 4px; font-family: 'Inter', sans-serif;">
+    <textarea name="message" placeholder="Tell us about your project..." required style="padding: 12px; border: 1px solid #e0deda; border-radius: 4px; height: 150px; font-family: 'Inter', sans-serif; resize: vertical;"></textarea>
+    
+    <button type="submit" class="btn-add" style="padding: 15px; font-size: 1rem; cursor: pointer;">Send Inquiry</button>
+  </form>
+</div>
+{% endblock %}
