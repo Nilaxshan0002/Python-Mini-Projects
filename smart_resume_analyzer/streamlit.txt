@@ -1,0 +1,4 @@
+Type this in new terminal to see the output 
+
+
+python -m streamlit run resume_analyzer.py
