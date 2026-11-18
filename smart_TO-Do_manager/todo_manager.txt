@@ -1,0 +1,3 @@
+Run this command in VS Code in the terminal 
+
+python todo_manager.py
