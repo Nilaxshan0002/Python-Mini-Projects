@@ -1,0 +1,9 @@
+Type this in new terminal to see the output 
+
+streamlit run app.py
+
+
+API keys 
+AQ.Ab8RN6Kkdb5fMjhBk-d9gqzN6JDHWh_IAXXl2pv7olE-0oxALA  	->	gemini
+
+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  	->	open ai
