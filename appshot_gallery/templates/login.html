@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="auth-card">
+  {% if mode == 'register' %}
+    <h1>Create an Account</h1>
+    <p style="color: #666; margin-bottom: 20px;">Join to save your favorite app screenshots.</p>
+  {% else %}
+    <h1>Welcome Back</h1>
+    <p style="color: #666; margin-bottom: 20px;">Log in to access your account.</p>
+  {% endif %}
+
+  <form method="POST">
+    <input name="username" placeholder="Username" required>
+    <input name="password" type="password" placeholder="Password" required>
+    <button type="submit">{{ 'Register' if mode == 'register' else 'Login' }}</button>
+  </form>
+
+  <div style="margin-top: 20px; font-size: 0.9rem;">
+    {% if mode == 'register' %}
+      Already have an account? <a href="/login" style="color: #111; font-weight: bold;">Log in here</a>
+    {% else %}
+      Don't have an account? <a href="/register" style="color: #111; font-weight: bold;">Create one</a>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

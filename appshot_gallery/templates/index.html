@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="hero">
+  <h1>App Store Screenshot Inspiration, <span>Elevated.</span></h1>
+  <p>Discover the best App Store screenshots filtered by genre, style, and color.</p>
+</div>
+
+<div class="filters">
+  <!-- Category Pills -->
+  <div class="filter-group">
+    <span class="filter-label">Genre:</span>
+    <a href="/" class="pill {{ 'active' if not active_category }}">All Genres</a>
+    {% for c in categories %}
+      <a href="/?category={{ c }}{% if active_color %}&color={{ active_color }}{% endif %}" 
+         class="pill {{ 'active' if active_category == c }}">{{ c }}</a>
+    {% endfor %}
+  </div>
+
+  <!-- Color Dropdown -->
+  <div class="filter-group">
+    <span class="filter-label">Color:</span>
+    <a href="/{% if active_category %}?category={{ active_category }}{% endif %}" class="pill {{ 'active' if not active_color }}">All Colors</a>
+    {% for color in colors %}
+      <a href="/?{% if active_category %}category={{ active_category }}&{% endif %}color={{ color }}" 
+         class="pill {{ 'active' if active_color == color }}">{{ color }}</a>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="gallery-grid">
+  {% for shot in shots %}
+    <div class="shot-card">
+      <div class="shot-image">
+        <img src="{{ shot.image_url }}" alt="{{ shot.title }}">
+      </div>
+      <div class="shot-info">
+        <div class="shot-app">
+          <div class="app-icon" style="background: #eee;"></div>
+          <div>
+            <h3>{{ shot.app_name }}</h3>
+            <p>{{ shot.category }} · {{ shot.color }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <h2>No screenshots found 😢</h2>
+      <p>Try adjusting your filters or search.</p>
+      <a href="/" class="btn-primary">Clear Filters</a>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

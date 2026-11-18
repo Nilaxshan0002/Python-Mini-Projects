@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AppShot Gallery</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav>
+  <div class="nav-container">
+    <a href="/" class="brand">AppShot <span>Gallery</span></a>
+    
+    <form method="GET" action="/" class="nav-search">
+      <input name="q" placeholder="Search apps..." value="{{ request.args.get('q', '') }}">
+    </form>
+
+    <div class="nav-links">
+      <a href="/">Inspiration</a>
+      
+      {% if session.user_id %}
+        <!-- Logged In -->
+        <span style="color: #888; font-size: 0.9rem;">👤 {{ session.username }}</span>
+        {% if session.role == 'admin' %}
+          <a href="/admin" class="btn-small">Admin</a>
+        {% endif %}
+        <a href="/logout" class="btn-small">Logout</a>
+      {% else %}
+        <!-- Logged Out -->
+        <a href="/login" class="btn-small">Login</a>
+        <a href="/register" class="btn-small" style="background: #ff5a5f;">Register</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+
+<div class="flash-wrap">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for cat, msg in messages %}
+      <div class="flash {{ cat }}">{{ msg }}</div>
+    {% endfor %}
+  {% endwith %}
+</div>
+
+<main>{% block content %}{% endblock %}</main>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="admin-header">
+  <h1>Admin Dashboard</h1>
+  <p>Manage your AppShot Gallery content</p>
+</div>
+
+<div class="admin-grid">
+  <!-- Add Form -->
+  <div class="card">
+    <h2>➕ Add New Screenshot</h2>
+    <form method="POST">
+      <input name="title" placeholder="Screenshot Title (e.g. Crypto Tracker)" required>
+      <input name="app_name" placeholder="App Name (e.g. Coinbase)" required>
+      <input name="category" placeholder="Category (e.g. Finance, Health)" required>
+      <input name="color" placeholder="Color Theme (e.g. Dark, Light, Blue)" required>
+      <input name="image_url" placeholder="Image URL" required>
+      <button type="submit">Upload</button>
+    </form>
+  </div>
+
+  <!-- List -->
+  <div class="card">
+    <h2>📸 Current Screenshots ({{ shots|length }})</h2>
+    <div class="admin-list">
+      {% for shot in shots %}
+        <div class="admin-item">
+          <img src="{{ shot.image_url }}" alt="{{ shot.title }}">
+          <div class="admin-item-info">
+            <h4>{{ shot.app_name }}</h4>
+            <p>{{ shot.category }} · {{ shot.color }}</p>
+          </div>
+          <a href="/admin/delete/{{ shot.id }}" class="btn-sm danger" onclick="return confirm('Delete this?')">🗑</a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
