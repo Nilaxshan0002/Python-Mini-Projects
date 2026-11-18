@@ -1,0 +1,3 @@
+Run this command in the terminal like this to see the output 
+
+--python -m streamlit run app.py--
