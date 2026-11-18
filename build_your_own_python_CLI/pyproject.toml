@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "devtool-cli"
+version = "0.1.0"
+description = "A custom Python CLI tool built for developers."
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+]
+
+[project.scripts]
+devtool = "devtool.cli:app"
+
+# This tells hatchling exactly where your code lives
+[tool.hatch.build.targets.wheel]
+packages = ["devtool"]
