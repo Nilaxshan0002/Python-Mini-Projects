@@ -1,0 +1,11 @@
+{
+    "master_hash": "d3bd16831c376ed51e9cbf55e582c5307672fc1f84836eab6d1018d06e23746c",
+    "salt": "OSGlp05PUpJVmUzczSZeDQ==",
+    "passwords": [
+        {
+            "site": "Steam",
+            "username": "johndoe123",
+            "password": "gAAAAABq4PfMxqwFXyBVtu6-A0FTVrFwOw1v-vqO-hY4fzrPe7npQuv8RPZx80DDhK8yupVvXF3yIZ5DYDDhF_J-uNERQmEHE2eHuJ3pkd3K2vYhN-yMPns="
+        }
+    ]
+}
