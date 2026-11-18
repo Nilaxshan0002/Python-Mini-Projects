@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Component Gallery</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a href="/" class="brand">◈ Component Gallery</a>
+  </div>
+  <div class="nav-right">
+    <form action="/" method="GET" class="search-form">
+      <input type="text" name="q" placeholder="Search components..." value="{{ search }}">
+    </form>
+    <a href="/admin" class="btn-nav">Upload Component</a>
+  </div>
+</nav>
+
+<div class="flash-wrap">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for cat, msg in messages %}
+      <div class="flash {{ cat }}">{{ msg }}</div>
+    {% endfor %}
+  {% endwith %}
+</div>
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<!-- TOAST NOTIFICATION -->
+<div id="toast" class="toast">Code copied to clipboard!</div>
+
+<!-- CODE VIEWER MODAL -->
+<div id="codeModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modalTitle">Component Code</h3>
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+    </div>
+    <pre><code id="modalCode"></code></pre>
+  </div>
+</div>
+
+<script>
+  // Copy code to clipboard & show toast
+  function copyCode(btn) {
+    // Find the hidden textarea right next to the button
+    const code = btn.nextElementSibling.value;
+    navigator.clipboard.writeText(code);
+    
+    // Show toast
+    const toast = document.getElementById("toast");
+    toast.className = "toast show";
+    setTimeout(function(){ 
+      toast.className = toast.className.replace("show", ""); 
+    }, 3000);
+  }
+
+  // Open code viewer modal
+  function openModal(title, code) {
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalCode').innerText = code;
+    document.getElementById('codeModal').style.display = "flex";
+  }
+
+  // Close modal
+  function closeModal() {
+    document.getElementById('codeModal').style.display = "none";
+  }
+
+  // Close modal if clicking outside the dark box
+  window.onclick = function(event) {
+    const modal = document.getElementById('codeModal');
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
+
+</body>
+</html>

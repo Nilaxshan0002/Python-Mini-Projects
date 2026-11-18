@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="admin-layout">
+  
+  <!-- LEFT: UPLOAD FORM -->
+  <div class="admin-form-container">
+    <h1>Upload New Component</h1>
+    <p style="color: #6b7280; margin-bottom: 30px;">Paste raw HTML with inline styles to generate a live preview card.</p>
+
+    <form method="POST" class="admin-form">
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" name="title" placeholder="e.g. Neon Button" required>
+      </div>
+
+      <div class="form-group">
+        <label>Category</label>
+        <input type="text" name="category" placeholder="e.g. Buttons, Cards, Inputs" required>
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <input type="text" name="description" placeholder="Short description..." required>
+      </div>
+
+      <div class="form-group">
+        <label>HTML/CSS Code</label>
+        <textarea name="code_snippet" rows="8" placeholder="<button style='...'>Click me</button>" required></textarea>
+      </div>
+
+      <button type="submit" class="btn-primary">Publish Component</button>
+    </form>
+  </div>
+
+  <!-- RIGHT: EXISTING COMPONENTS -->
+  <div class="admin-list-container">
+    <h2>Live Gallery ({{ components|length }})</h2>
+    <p style="color: #6b7280; margin-bottom: 20px;">Manage your uploaded components.</p>
+
+    <div class="admin-list">
+      {% for c in components %}
+        <div class="admin-list-item">
+          <div class="admin-item-info">
+            <strong>{{ c.title }}</strong> 
+            <span class="badge">{{ c.category }}</span>
+          </div>
+          <a href="/delete/{{ c.id }}" class="btn-delete">Delete</a>
+        </div>
+      {% else %}
+        <div style="padding: 30px; text-align: center; color: #6b7280;">
+          No components uploaded yet.
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

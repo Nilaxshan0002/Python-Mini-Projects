@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h3>Categories</h3>
+    <ul class="category-list">
+      {% for cat in categories %}
+        <li>
+          <a href="/?category={{ cat }}" class="cat-link {{ 'active' if active_category == cat }}">
+            {{ cat }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <!-- MAIN GRID -->
+  <div class="content">
+    <div class="content-header">
+      <h1>{{ active_category }} Components</h1>
+      <p>Beautifully crafted UI elements ready to copy and paste.</p>
+    </div>
+
+    <div class="grid">
+      {% for comp in components %}
+        <div class="card">
+          <!-- Live Preview -->
+          <div class="card-preview">
+            {{ comp.code_snippet | safe_html }}
+          </div>
+          
+          <!-- Card Info -->
+          <div class="card-info">
+            <div class="card-title">
+              <h3>{{ comp.title }}</h3>
+              <span class="badge">{{ comp.category }}</span>
+            </div>
+            <p>{{ comp.description }}</p>
+            
+            <div class="card-actions">
+              <!-- Copy Button -->
+              <button class="btn-copy" onclick="copyCode(this)">Copy Code</button>
+              <textarea style="display:none;">{{ comp.code_snippet }}</textarea>
+              
+              <!-- View Code Button triggers the modal from base.html -->
+              <button class="btn-view" onclick="openModal('{{ comp.title }}', {{ comp.code_snippet | tojson | safe }})">
+                View Code
+              </button>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="empty-state">
+          <h2>No components found</h2>
+          <p>Try a different category or upload a new component.</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
